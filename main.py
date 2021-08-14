@@ -45,6 +45,26 @@ def get_files_and_path():
             print(f'invalid path: "{PATH}" try again !!')
     return (files,PATH)
 
+def generate_new_name(fileName):
+    fileName=fileName.lower()
+    for i in range(len(fileName)):
+        if fileName[i]==' ':
+            fileName=fileName[:i]+'-'+fileName[i+1:]
+        elif fileName[i]=='é' or fileName[i]=='è':
+            fileName=fileName[:i]+'e'+fileName[i+1:]
+        elif fileName[i]=='à':
+            fileName=fileName[:i]+'a'+fileName[i+1:]
+
+    i=0
+    while i < len(fileName)-1 and len(fileName) >= 2:
+        if fileName[i]=='-' and fileName[i+1]==fileName[i]:
+            fileName=fileName[:i]+fileName[i+1:]
+        else:
+            i+=1
+
+    return fileName
+
+
 # MAIN PROGRAM
 print_logo()
 choice=get_choice()
