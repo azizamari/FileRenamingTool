@@ -45,6 +45,18 @@ def get_files_and_path():
             print(f'invalid path: "{PATH}" try again !!')
     return (files,PATH)
 
+def remove_extension(filesList,extension):
+    toBePopped=[]
+    for index,file in enumerate(filesList):
+        if file.endswith('.'+extension):
+            filesList[index]=file[:len(file)-len(extension)-1]
+        else:
+            toBePopped.append(index)
+    counter=0
+    for index in toBePopped:
+        filesList.pop(index+counter)
+        counter-=1
+
 def generate_new_name(fileName):
     fileName=fileName.lower()
     for i in range(len(fileName)):
@@ -63,7 +75,6 @@ def generate_new_name(fileName):
             i+=1
 
     return fileName
-
 
 # MAIN PROGRAM
 print_logo()
