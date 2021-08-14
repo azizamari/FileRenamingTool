@@ -76,7 +76,21 @@ def generate_new_name(fileName):
 
     return fileName
 
+def rename_files(filesList,PATH):
+    remove_extension(filesList,'mp4')
+    count=0
+    for file in filesList:
+        newName=generate_new_name(file)+'.mp4'
+        os.rename(os.path.join(PATH,file+'.mp4'),os.path.join(PATH,newName))
+        count+=1
+        print(f"DONE {count}/{len(filesList)}: renamed '{file}.mp4' to '{newName}.mp4")
+    print(f"Successfully renamed {count} files !!!!!")
+
+
 # MAIN PROGRAM
 print_logo()
-choice=get_choice()
-files,PATH=get_files_and_path()
+while True:
+    choice=get_choice()
+    if choice==1:
+        files,PATH=get_files_and_path()
+        rename_files(files,PATH)
