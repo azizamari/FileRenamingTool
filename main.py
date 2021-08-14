@@ -33,6 +33,19 @@ def get_choice():
             print(f"Invalid choice '{choice}'")
     return int(choice)
 
+def get_files_and_path():
+    PATH=''
+    while True:
+        print('Insert folder path:')
+        PATH=input('> ')
+        try:
+            files=os.listdir(PATH)
+            break
+        except:
+            print(f'invalid path: "{PATH}" try again !!')
+    return (files,PATH)
+
 # MAIN PROGRAM
 print_logo()
 choice=get_choice()
+files,PATH=get_files_and_path()
