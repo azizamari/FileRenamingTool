@@ -19,6 +19,20 @@ def print_logo():
       .*' /  .*' ; .*`- +'  `*' 
       `*-*   `*-*  `*-*'
     """)
+def get_choice():
+    print("Pick a functionality by typing it's number")
+    print("[1] Beautify mp4 file name")
+    print("[2] Add date to file names")
+    print("[3] Remove date from file names (reverse [2])")
+    choice=1
+    while True:
+        choice=input('> ')
+        if choice in ['1','2','3']:
+            break
+        else:
+            print(f"Invalid choice '{choice}'")
+    return int(choice)
 
 # MAIN PROGRAM
 print_logo()
+choice=get_choice()
