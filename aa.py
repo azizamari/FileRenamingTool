@@ -58,7 +58,7 @@ def remove_extension(filesList,extension):
     for index in toBePopped:
         filesList.pop(index+counter)
         counter-=1
-
+        
 def generate_new_name(fileName):
     fileName=fileName.lower()
     for i in range(len(fileName)):
@@ -88,6 +88,24 @@ def rename_files(filesList,PATH):
         print(f"DONE {count}/{len(filesList)}: renamed '{file}.mp4' to '{newName}.mp4")
     print(f"Successfully renamed {count} files !!!!!")
 
+def remove_duplicate_dates(filesList,PATH):
+    remove_extension(filesList,'mp4')
+    count=0
+    for file in filesList:
+        newName=' '
+        stop=False
+        try:
+            if len(file)<10: raise 
+            newName=file[:len(file)-9]+'.mp4'
+        except:
+            count-=1
+            print(f"ERROR: this file '{file}.mp4' caused a problem. Make sure it has a duplicate date.")
+            break
+        os.rename(os.path.join(PATH,file+'.mp4'),os.path.join(PATH,newName))
+        count+=1
+        print(f"DONE {count}/{len(filesList)}: renamed '{file}.mp4' to '{newName}.mp4 ")
+    print(f"\nSUCCESSFULLY renamed {count} files !!")
+
 def add_dates(filesList,PATH):
     remove_extension(filesList,'mp4')
     count=0
@@ -110,3 +128,7 @@ while True:
     elif choice==2:
         files,PATH=get_files_and_path()
         add_dates(files,PATH)
+    elif choice==3:
+        files,PATH=get_files_and_path()
+        remove_duplicate_dates(files,PATH)
+    print('\n')
